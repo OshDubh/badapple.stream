@@ -21,17 +21,47 @@
       height: 100vh;
       object-fit: cover;
     }
+    #unmute-btn {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(255,255,255,0.8);
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
-  <video id="video" muted loop playsinline preload="auto">
+  <button id="unmute-btn">Unmute</button>
+  <video id="video" autoplay muted loop playsinline preload="auto">
     <source src="badapple.webm" type="video/webm" />
-    Your browser does not support the video tag.
   </video>
 
   <script>
     const video = document.getElementById('video');
-    video.play();  // Attempt to start the video programmatically
+    const btn = document.getElementById('unmute-btn');
+    let hideTimeout;
+
+    const showButton = () => {
+      btn.style.display = 'block';
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        btn.style.display = 'none';
+      }, 3000);
+    };
+
+    document.addEventListener('mousemove', showButton);
+    document.addEventListener('touchstart', showButton);
+
+    btn.addEventListener('click', () => {
+      video.muted = false;
+      video.play();
+      btn.style.display = 'none';
+    });
   </script>
 </body>
 </html>
