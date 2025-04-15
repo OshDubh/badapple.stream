@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bad Apple</title>
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       background: black;
@@ -13,6 +15,7 @@
       height: 100%;
       width: 100%;
     }
+
     video {
       position: fixed;
       top: 0;
@@ -21,11 +24,12 @@
       height: 100vh;
       object-fit: cover;
     }
+
     #unmute-btn {
       position: fixed;
       top: 1rem;
       left: 1rem;
-      background: rgba(255,255,255,0.8);
+      mix-blend-mode: difference;
       border: none;
       padding: 0.5rem 1rem;
       font-size: 1rem;
@@ -35,8 +39,9 @@
     }
   </style>
 </head>
+
 <body>
-  <button id="unmute-btn">Unmute</button>
+  <button id="unmute-btn">unmute</button>
   <video id="video" autoplay muted loop playsinline preload="auto">
     <source src="badapple.webm" type="video/webm" />
   </video>
@@ -51,17 +56,18 @@
       clearTimeout(hideTimeout);
       hideTimeout = setTimeout(() => {
         btn.style.display = 'none';
-      }, 3000);
+      }, 1600);
     };
 
     document.addEventListener('mousemove', showButton);
     document.addEventListener('touchstart', showButton);
 
     btn.addEventListener('click', () => {
-      video.muted = false;
+      video.muted = !video.muted;
+      btn.innerText = video.muted ? 'unmute' : 'mute';
       video.play();
-      btn.style.display = 'none';
     });
   </script>
 </body>
+
 </html>
