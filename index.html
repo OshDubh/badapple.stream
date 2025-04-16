@@ -53,10 +53,15 @@
     const btn = document.getElementById('unmute-btn');
     let hideTimeout;
 
+    let hovering = false
+    btn.addEventListener('mouseenter', () => hovering = true);
+    btn.addEventListener('mouseleave', () => hovering = false);
+
     const showButton = () => {
       btn.style.display = 'block';
       clearTimeout(hideTimeout);
       hideTimeout = setTimeout(() => {
+        if (hovering) return;
         btn.style.display = 'none';
       }, 1600);
     };
