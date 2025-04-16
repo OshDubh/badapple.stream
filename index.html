@@ -63,6 +63,7 @@
 
     document.addEventListener('mousemove', showButton);
     document.addEventListener('touchstart', showButton);
+    document.addEventListener('load', showButton);
 
     btn.addEventListener('click', () => {
       video.muted = !video.muted;
